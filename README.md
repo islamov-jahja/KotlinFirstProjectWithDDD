@@ -1,0 +1,2 @@
+# KotlinFirstProjectWithDDD
+ProjectForEducationAndTryDDD
