@@ -43,12 +43,3 @@ tasks.withType<KotlinCompile> {
 		jvmTarget = "1.8"
 	}
 }
-
-tasks.test {
-	outputs.dir(snippetsDir)
-}
-
-tasks.asciidoctor {
-	inputs.dir(snippetsDir)
-	dependsOn(test)
-}
