@@ -5,5 +5,5 @@ import com.yahya.FirstProjectWithDDD.domain.core.entity.Server
 
 interface IServerProcessing {
     fun putInfoAboutServer(serverDataTransfer: ServerDataTransfer)
-    fun getInfoAboutServers(): ServerDataTransfer
+    fun getInfoAboutServers(): MutableList<ServerDataTransfer>
 }

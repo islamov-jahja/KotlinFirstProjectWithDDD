@@ -4,7 +4,7 @@ import javax.persistence.*
 
 
 @Entity(name = "game_mode")
-class GameMode (_mode: String, _serverEndPoint: String){
+class GameMode (_mode: String, _serverEndPoint: String): IEntity{
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)

@@ -1,6 +1,8 @@
 package com.yahya.FirstProjectWithDDD.application.controllers.Server.dto
 
+import com.yahya.FirstProjectWithDDD.application.controllers.IDTO
+
 data class ServerDataTransfer(
   val endPoint: String,
-  val serverNameWithGameModes: ServerNameWithGameModes
-)
+  val info: ServerNameWithGameModes
+):IDTO

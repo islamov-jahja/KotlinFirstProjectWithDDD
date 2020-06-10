@@ -6,5 +6,4 @@ import org.springframework.data.repository.CrudRepository
 interface ICustomizedServerRepository : CrudRepository<Server, Long> {
     fun findByEndPoint(endPoint: String): Server
     fun existsByEndPoint(endPoint: String): Boolean
-    fun deleteByEndPoint(endPoint: String)
 }

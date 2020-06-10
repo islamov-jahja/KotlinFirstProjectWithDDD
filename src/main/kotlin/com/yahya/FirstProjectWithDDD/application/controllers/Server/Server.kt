@@ -17,9 +17,19 @@ class Server(@Autowired val serverProcessing: IServerProcessing) {
     @Path("/{endpoint}/info")
     @PUT
     @Produces(APPLICATION_JSON)
-    fun putServer(@PathParam("endpoint") endpoint: String, @RequestBody serverNameWithGameModes: ServerNameWithGameModes) : Response{
+    fun putServer(@PathParam("endpoint") endpoint: String, @RequestBody serverNameWithGameModes: ServerNameWithGameModes): Response{
         val serverDataTransfer = ServerDataTransfer(endpoint, serverNameWithGameModes)
         serverProcessing.putInfoAboutServer(serverDataTransfer)
         return Response.ok().build()
+    }
+    @Path("/info")
+    @GET
+    @Produces(APPLICATION_JSON)
+    fun getServers(): Response{
+        val infoAboutServers = serverProcessing.getInfoAboutServers()
+        return when(val isEmpty = infoAboutServers.isEmpty()) {
+            true -> Response.status(Response.Status.NOT_FOUND).build()
+            else -> Response.ok(infoAboutServers).build()
+        }
     }
 }
