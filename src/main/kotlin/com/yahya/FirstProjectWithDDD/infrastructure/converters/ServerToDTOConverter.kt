@@ -6,10 +6,15 @@ import com.yahya.FirstProjectWithDDD.application.controllers.Server.dto.ServerNa
 import com.yahya.FirstProjectWithDDD.domain.core.entity.IEntity
 import com.yahya.FirstProjectWithDDD.domain.core.entity.Server
 import com.yahya.FirstProjectWithDDD.domain.supporting.converter.IEntityToDTOConverter
+import com.yahya.FirstProjectWithDDD.domain.supporting.converter.TryIncorrectConvertException
 
 class ServerToDTOConverter: IEntityToDTOConverter {
-    override fun convert(entity: IEntity): IDTO {
-        val server:Server = entity as Server
+    override fun convert(entity: IEntity): ServerDataTransfer {
+        if (entity !is Server){
+            throw TryIncorrectConvertException()
+        }
+
+        val server:Server = entity
         val gameModesInStringFormat = getGameModesInStringFormat(server)
         return ServerDataTransfer(server.endPoint, ServerNameWithGameModes(server.name, gameModesInStringFormat))
     }

@@ -5,6 +5,7 @@ import com.yahya.FirstProjectWithDDD.domain.core.entity.GameMode
 import com.yahya.FirstProjectWithDDD.domain.core.entity.Server
 import com.yahya.FirstProjectWithDDD.domain.core.repositories.ICustomizedServerRepository
 import com.yahya.FirstProjectWithDDD.domain.core.services.IServerProcessing
+import com.yahya.FirstProjectWithDDD.domain.supporting.converter.TryIncorrectConvertException
 import com.yahya.FirstProjectWithDDD.infrastructure.converters.EntityConverter
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Component
@@ -30,7 +31,11 @@ class ServerService(@Autowired private val customizedServerRepository: ICustomiz
 
         val servers = customizedServerRepository.findAll()
         for (server in servers){
-            val serverDataTransfer = entityConverter.convert(server) as ServerDataTransfer
+            val serverDataTransfer = entityConverter.convert(server)
+            if (serverDataTransfer !is ServerDataTransfer){
+                throw TryIncorrectConvertException()
+            }
+
             serverDataTransfers.add(serverDataTransfer)
         }
 
